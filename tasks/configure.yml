@@ -14,8 +14,11 @@
 - name: Configure database directory
   file: state=directory path={{ mongodb_conf_dbpath }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
 
+- name: Configure log directory
+  file: state=directory path={{ mongodb_conf_logpath | dirname }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+
 - name: Configure logs
-  file: state=file path={{ mongodb_conf_logpath }} owner={{mongodb_user}} group={{mongodb_user}} mode=0644
+  file: state=touch path={{ mongodb_conf_logpath }} owner={{mongodb_user}} group={{mongodb_user}} mode=0644
 
 - name: Run mongoshell commands
   command: mongo {{ item.key }} --eval "{{ item.value|join('\n') }}"
