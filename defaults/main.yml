@@ -29,6 +29,7 @@ mongodb_conf_port: 27017                          # Specify port number
 mongodb_conf_quota: no                            # Limits each database to a certain number of files
 mongodb_conf_quotaFiles: 8                        # Number of quota files
 mongodb_conf_syslog: no                           # Log to system's syslog facility instead of file
+mongodb_conf_smallfiles: no                       # Sets MongoDB to use a smaller default file size
 
 # Replica set options:
 mongodb_conf_replSet:                             # Enable replication <setname>[/<optionalseedhostlist>]
