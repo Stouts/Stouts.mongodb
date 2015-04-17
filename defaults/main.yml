@@ -1,6 +1,7 @@
 ---
 
 mongodb_enabled: yes
+mongodb_install: yes
 
 mongodb_package: mongodb-org
 
@@ -42,7 +43,7 @@ mongodb_shell: {}                                 # Define mongo shell commands 
 
 
 # MMS Agent
-mongodb_mms_agent_pkg: https://mms.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager_1.4.2.783-1_amd64.deb
+mongodb_mms_agent_pkg: https://mms.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager_latest_amd64.deb
 mongodb_mms_group_id: ""
 mongodb_mms_api_key: ""
 mongodb_mms_base_url: https://mms.mongodb.com
