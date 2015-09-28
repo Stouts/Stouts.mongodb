@@ -1,0 +1,43 @@
+# {{ ansible_managed }}
+
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: "{{ mongodb_conf_dbpath }}"
+  engine: "{{ mongodb_conf_db_engine }}"
+  journal:
+    enabled: {{ mongodb3_conf_journal }}
+#  mmapv1:
+{% if mongodb_conf_db_engine == "wiredTiger" %}
+  wiredTiger:
+      engineConfig: 
+          cacheSizeGB: {{ mongodb_conf_tiger_cacheSizeGB }}
+      collectionConfig: 
+          blockCompressor: {{ mongodb_conf_tiger_blockCompressor }}  
+{% endif %}
+
+# where to write logging data.
+systemLog:
+  destination: file
+  path: "{{ mongodb_conf_logpath }}"
+  logAppend: {{ mongodb3_conf_logappend }}
+
+# network interfaces
+net:
+  port: {{ mongodb_conf_port|int }}
+  bindIp: "{{ mongodb_conf_bind_ip }}"
+
+processManagement:
+  fork: {{ mongodb3_conf_fork }}
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+#sharding:

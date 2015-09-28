@@ -3,6 +3,12 @@
 - name: Configure mongodb
   template: src=mongod.conf.j2 dest=/etc/mongod.conf owner=root group=root mode=0644
   notify: mongodb restart
+  when: 'mongodb_ver != 3'
+
+- name: Configure ver 3.0 mongodb
+  template: src=mongod3.conf.j2 dest=/etc/mongod.conf owner=root group=root mode=0644
+  notify: mongodb restart
+  when: 'mongodb_ver == 3'
 
 - name: Configure log rotation
   template: src=logrotate.conf.j2 dest=/etc/logrotate.d/mongodb.conf
