@@ -27,6 +27,13 @@
   command: mongo {{ item.key }} --eval "{{ item.value|join('\n') }}"
   with_dict: mongodb_shell
 
+- name: Disable transparent hugepages (https://docs.mongodb.org/manual/tutorial/transparent-huge-pages/) (1/2)
+  copy: src=disable-transparent-hugepages dest=/etc/init.d/disable-transparent-hugepages
+        mode=0755 owner=root group=root
+
+- name: Disable transparent hugepages (2/2)
+  service: name=disable-transparent-hugepages enabled=true
+
 - name: Ensure mongodb is started
   service: name={{ mongodb_daemon_name }} state=started enabled=yes
   changed_when: False
