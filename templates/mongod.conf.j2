@@ -17,7 +17,9 @@ notablescan = {{ mongodb_conf_notablescan|to_nice_json|bool }}
 port = {{ mongodb_conf_port|int }}
 quota = {{ mongodb_conf_quota|to_nice_json|bool }}
 quotaFiles = {{ mongodb_conf_quotaFiles|int }}
+{% if mongodb_conf_logpath == '' %}
 syslog = {{ mongodb_conf_syslog|to_nice_json|bool }}
+{% endif %}
 smallfiles = {{ mongodb_conf_smallfiles|to_nice_json|bool }}
 {% if mongodb_conf_replSet %}
 # Replica set options:
