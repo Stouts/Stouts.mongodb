@@ -8,7 +8,11 @@
 
 - name: Add APT repository
   apt_repository: repo="{{mongodb_repository}}" update_cache=yes
-  when: '"mongodb-org" in mongodb_package'
+  when: '"mongodb-org" in mongodb_package and mongodb_ver != 3'
+
+- name: Add ver 3.0 APT repository
+  apt_repository: repo="{{mongodb3_repository}}" update_cache=yes
+  when: '"mongodb-org" in mongodb_package and mongodb_ver == 3'
 
 - name: Install MongoDB package
   apt: pkg={{mongodb_package}} state=present

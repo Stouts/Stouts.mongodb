@@ -1,5 +1,5 @@
 ---
-
+mongodb_ver: 2
 mongodb_enabled: yes
 mongodb_install: yes
 
@@ -31,6 +31,14 @@ mongodb_conf_quota: no                            # Limits each database to a ce
 mongodb_conf_quotaFiles: 8                        # Number of quota files
 mongodb_conf_syslog: no                           # Log to system's syslog facility instead of file
 mongodb_conf_smallfiles: no                       # Sets MongoDB to use a smaller default file size
+
+# Config for MongoDB 3.0
+mongodb_conf_db_engine: wiredTiger                # Database engine
+mongodb_conf_tiger_cacheSizeGB: 1                 # Cache size 
+mongodb_conf_tiger_blockCompressor: snappy	      # Compression for collection
+mongodb3_conf_fork: 'false'                       # Fork server process
+mongodb3_conf_journal: 'true'                     # Enable journaling
+mongodb3_conf_logappend: 'true'                   # Append to logpath instead of over-writing
 
 # Replica set options:
 mongodb_conf_replSet:                             # Enable replication <setname>[/<optionalseedhostlist>]
