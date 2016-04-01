@@ -23,7 +23,7 @@ mongodb_additional_packages:
 
 mongodb_user: mongodb
 
-mongodb_version: "2.6.11"                        # Fully specified target installation version
+mongodb_version: "3.2.4"                         # Fully specified target installation version
 
 # Service setup options
 mongodb_version_config:                          # Custom configuration for major/minor version variants
