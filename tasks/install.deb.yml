@@ -13,8 +13,8 @@
   apt_repository: repo="{{mongodb_repository_data.repository}}" update_cache=yes
 
 - name: Install MongoDB package
-  apt: pkg="{{mongodb_repository_data.package+'='+mongodb_version}}" state=present
+  apt: name="{{mongodb_repository_data.package+'='+mongodb_version}}" state=present
 
 - name: Install additional packages
-  apt: pkg={{item}}
-  with_items: mongodb_additional_packages
+  apt: name={{item}}
+  with_items: "{{mongodb_additional_packages}}"
