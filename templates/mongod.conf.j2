@@ -1,24 +1,28 @@
 # {{ ansible_managed }}
 
-auth = {{ mongodb_conf_auth|to_nice_json|bool }}
+auth = {{ mongodb_conf_auth|to_nice_json|bool|lower }}
 bind_ip = {{ mongodb_conf_bind_ip }}
-cpu = {{ mongodb_conf_cpu|to_nice_json|bool }}
+cpu = {{ mongodb_conf_cpu|to_nice_json|bool|lower }}
 dbpath = {{ mongodb_conf_dbpath }}
-fork = {{ mongodb_conf_fork|to_nice_json|bool }}
-httpinterface = {{ mongodb_conf_httpinterface|to_nice_json|bool }}
-ipv6 = {{ mongodb_conf_ipv6|to_nice_json|bool }}
-journal = {{ mongodb_conf_journal|to_nice_json|bool }}
-logappend = {{ mongodb_conf_logappend|to_nice_json|bool }}
+fork = {{ mongodb_conf_fork|to_nice_json|bool|lower }}
+httpinterface = {{ mongodb_conf_httpinterface|to_nice_json|bool|lower }}
+ipv6 = {{ mongodb_conf_ipv6|to_nice_json|bool|lower }}
+journal = {{ mongodb_conf_journal|to_nice_json|bool|lower }}
+logappend = {{ mongodb_conf_logappend|to_nice_json|bool|lower }}
 logpath = {{ mongodb_conf_logpath }}
 maxConns = {{ mongodb_conf_maxConns|int }}
-noprealloc = {{ mongodb_conf_noprealloc|to_nice_json|bool }}
-noscripting = {{ mongodb_conf_noscripting|to_nice_json|bool }}
-notablescan = {{ mongodb_conf_notablescan|to_nice_json|bool }}
+noprealloc = {{ mongodb_conf_noprealloc|to_nice_json|bool|lower }}
+noscripting = {{ mongodb_conf_noscripting|to_nice_json|bool|lower }}
+notablescan = {{ mongodb_conf_notablescan|to_nice_json|bool|lower }}
 port = {{ mongodb_conf_port|int }}
-quota = {{ mongodb_conf_quota|to_nice_json|bool }}
+quota = {{ mongodb_conf_quota|to_nice_json|bool|lower }}
+{% if mongodb_conf_quota %}
 quotaFiles = {{ mongodb_conf_quotaFiles|int }}
-syslog = {{ mongodb_conf_syslog|to_nice_json|bool }}
-smallfiles = {{ mongodb_conf_smallfiles|to_nice_json|bool }}
+{% endif %}
+{% if mongodb_conf_logpath == '' %}
+syslog = {{ mongodb_conf_syslog|to_nice_json|bool|lower }}
+{% endif %}
+smallfiles = {{ mongodb_conf_smallfiles|to_nice_json|bool|lower }}
 {% if mongodb_conf_replSet %}
 # Replica set options:
 replSet = {{ mongodb_conf_replSet }}

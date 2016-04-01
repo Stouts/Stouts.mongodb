@@ -1,7 +1,7 @@
 ---
 
 - name: Configure mongodb
-  template: src=mongod.conf.j2 dest=/etc/mongod.conf owner=root group=root mode=0644
+  template: src=mongod.conf.j2 dest=/etc/{{mongodb_config['config_file']}} owner=root group=root mode=0644
   notify: mongodb restart
 
 - name: Configure log rotation
@@ -17,10 +17,13 @@
 - name: Configure log directory
   file: state=directory path={{ mongodb_conf_logpath | dirname }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
 
-- name: Run mongoshell commands
-  command: mongo {{ item.key }} --eval "{{ item.value|join('\n') }}"
-  with_dict: mongodb_shell
-
 - name: Ensure mongodb is started
   service: name={{ mongodb_daemon_name }} state=started enabled=yes
   changed_when: False
+
+- name: Flush handlers to restart mongodb if necessary
+  meta: flush_handlers
+
+- name: Run mongoshell commands
+  command: mongo {{ item.key }} --eval "{{ item.value|join('\n') }}"
+  with_dict: mongodb_shell
