@@ -36,6 +36,9 @@ mongodb_version_config:                          # Custom configuration for majo
   v3.0:
     daemon: mongod
     config_file: mongod.conf
+  v3.2:
+    daemon: mongod
+    config_file: mongod.conf
 
 # Config options
 mongodb_conf_auth: no                             # Run with security
