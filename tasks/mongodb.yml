@@ -16,5 +16,8 @@
 - include: configure.yml
   when: mongodb_install
 
+- include: docker.yml
+  when: mongodb_docker
+
 - include: mms-agent.yml
   when: mongodb_mms_api_key != ""
