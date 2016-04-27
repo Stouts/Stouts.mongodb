@@ -1,0 +1,21 @@
+---
+
+# TODO: Support configuration
+
+- name: mongodb-docker | Ensure that redis directories is exists
+  file: state=directory path={{item}} recurse=True
+  with_items:
+  - "{{mongodb_conf_dbpath}}"
+
+- name: mongodb-docker | Start mongo
+  docker:
+    hostname: "mongodb.{{inventory_hostname}}"
+    image: "{{mongodb_docker_image}}"
+    name: mongodb
+    ports: "{{mongodb_docker_ports}}"
+    pull: always
+    restart_policy: always
+    state: reloaded
+    volumes: 
+    - "{{mongodb_conf_dbpath}}:/data/db"
+
