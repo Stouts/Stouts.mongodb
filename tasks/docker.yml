@@ -7,11 +7,17 @@
   with_items:
   - "{{mongodb_conf_dbpath}}"
 
+- set_fact:
+    mongodb_docker_hostname: ""
+    mongodb_docker_ports: []
+  when: mongodb_docker_net == 'host'
+
 - name: mongodb-docker | Start mongo
   docker:
-    hostname: "mongodb.{{inventory_hostname}}"
+    hostname: "{{mongodb_docker_hostname}}"
     image: "{{mongodb_docker_image}}"
     name: mongodb
+    net: "{{mongodb_docker_net}}"
     ports: "{{mongodb_docker_ports}}"
     pull: always
     restart_policy: always
