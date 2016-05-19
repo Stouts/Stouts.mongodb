@@ -22,6 +22,4 @@
     pull: always
     restart_policy: always
     state: reloaded
-    volumes: 
-    - "{{mongodb_conf_dbpath}}:/data/db"
-
+    volumes: "{{mongodb_docker_volumes}}"
