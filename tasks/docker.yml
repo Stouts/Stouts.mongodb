@@ -23,3 +23,6 @@
     restart_policy: always
     state: reloaded
     volumes: "{{mongodb_docker_volumes}}"
+    log_opt:
+      max-size: 50m
+      max-file: 10
