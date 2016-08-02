@@ -7,8 +7,8 @@ mongodb_install: yes
 mongodb_docker: no                              # Run mongo db as docker container
 mongodb_docker_net: bridge
 mongodb_docker_hostname: "mongodb.{{inventory_hostname}}"
-mongodb_docker_image: mongo
-mongodb_docker_ports: ["127.0.0.1:{{mongodb_conf_port}}:27017"] # Set empty to disable ports forwarding
+mongodb_docker_image: "mongo:{{mongodb_version}}"
+mongodb_docker_ports: ["{{mongodb_conf_bind_ip}}:{{mongodb_conf_port}}:27017"] # Set empty to disable ports forwarding
 mongodb_docker_volumes:
 - "{{mongodb_conf_dbpath}}:/data/db"
 
