@@ -20,6 +20,7 @@ mongodb_user: mongodb
 mongodb_logdir: /var/log/mongodb
 
 mongodb_version: "3.2.4"                         # Fully specified target installation version
+mongodb_transparent_hugepage_disable: false
 
 # Service setup options
 mongodb_version_config:                          # Custom configuration for major/minor version variants
