@@ -17,13 +17,22 @@
 - name: Configure log directory
   file: state=directory path={{ mongodb_conf_logpath | dirname }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
 
+- name: Disable transparent hugepages
+  template: src=transparent_hugepage.conf dest=/etc/init/mongodb_settings.conf owner=root group=root mode=0644
+  notify: ["mongodb restart", "mongodb_settings restart"]
+  when: mongodb_transparent_hugepage_disable
+
 - name: Ensure mongodb is started
   service: name={{ mongodb_daemon_name }} state=started enabled=yes
-  changed_when: False
+
+- name: Ensure mongodb_settings is started
+  service: name=mongodb_settings state=started enabled=yes
+  changed_when: false
+  when: mongodb_transparent_hugepage_disable
 
 - name: Flush handlers to restart mongodb if necessary
   meta: flush_handlers
 
 - name: Run mongoshell commands
-  command: mongo {{ item.key }} --eval "{{ item.value|join('\n') }}"
+  command: mongo {{ item.key }} --eval "{{ item.value|join(';') }}"
   with_dict: "{{mongodb_shell}}"
