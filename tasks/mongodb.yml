@@ -1,6 +1,7 @@
 ---
 - name: Set up configuration parameters 1/3
-  set_fact: mongodb_major_minor_version=v{{mongodb_version[:3]}} # the 'v' is necessary due to Ansible's number autoconversion quirks
+  set_fact:
+    mongodb_major_minor_version: v{{mongodb_version[:3]}} # the 'v' is necessary due to Ansible's number autoconversion quirks
 
 - name: Set up configuration parameters 2/3
   set_fact:
