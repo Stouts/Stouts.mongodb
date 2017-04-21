@@ -1,32 +1,62 @@
 ---
 
 - name: Configure mongodb
-  template: src=mongod.conf.j2 dest=/etc/{{mongodb_config['config_file']}} owner=root group=root mode=0644
+  template:
+    src: mongod.conf.j2
+    dest: /etc/{{mongodb_config['config_file']}}
+    owner: root
+    group: root
+    mode: 0644
   notify: mongodb restart
 
 - name: Configure log rotation
-  template: src=logrotate.conf.j2 dest=/etc/logrotate.d/mongodb.conf
+  template:
+    src: logrotate.conf.j2
+    dest: /etc/logrotate.d/mongodb.conf
   when: mongodb_logrotate
 
 - name: Create mongodb user
-  user: name={{mongodb_user}} group={{mongodb_user}}
+  user:
+    name: "{{mongodb_user}}"
+    group: "{{mongodb_user}}"
 
 - name: Configure database directory
-  file: state=directory path={{ mongodb_conf_dbpath }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+  file:
+    state: directory
+    path: "{{ mongodb_conf_dbpath }}"
+    owner: "{{mongodb_user}}"
+    group: "{{mongodb_user}}"
+    mode: 0755
 
 - name: Configure log directory
-  file: state=directory path={{ mongodb_conf_logpath | dirname }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+  file:
+    state: directory
+    path: "{{ mongodb_conf_logpath | dirname }}"
+    owner: "{{mongodb_user}}"
+    group: "{{mongodb_user}}"
+    mode: 0755
 
 - name: Disable transparent hugepages
-  template: src=transparent_hugepage.conf dest=/etc/init/mongodb_settings.conf owner=root group=root mode=0644
+  template:
+    src: transparent_hugepage.conf
+    dest: /etc/init/mongodb_settings.conf
+    owner: root
+    group: root
+    mode: 0644
   notify: ["mongodb restart", "mongodb_settings restart"]
   when: mongodb_transparent_hugepage_disable
 
 - name: Ensure mongodb is started
-  service: name={{ mongodb_daemon_name }} state=started enabled=yes
+  service:
+    name: "{{ mongodb_daemon_name }}"
+    state: started
+    enabled: yes
 
 - name: Ensure mongodb_settings is started
-  service: name=mongodb_settings state=started enabled=yes
+  service:
+    name: mongodb_settings
+    state: started
+    enabled: yes
   changed_when: false
   when: mongodb_transparent_hugepage_disable
 

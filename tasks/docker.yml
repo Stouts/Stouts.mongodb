@@ -3,7 +3,10 @@
 # TODO: Support configuration
 
 - name: mongodb-docker | Ensure that redis directories is exists
-  file: state=directory path={{item}} recurse=True
+  file:
+    state: directory
+    path: "{{item}}"
+    recurse: True
   with_items:
   - "{{mongodb_conf_dbpath}}"
 
