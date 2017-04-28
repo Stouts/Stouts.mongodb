@@ -14,16 +14,22 @@
 
 - name: mongodb-docker | Start mongo
   docker:
-    hostname: "{{mongodb_docker_hostname}}"
+    hostname: "{{item.hostname|default(mongodb_docker_hostname)}}"
     image: "{{mongodb_docker_image}}"
     command: "{{mongodb_docker_command|default(omit)}}"
-    name: mongodb
+    name: "{{item.name}}"
     net: "{{mongodb_docker_net}}"
     ports: "{{mongodb_docker_ports}}"
+    links: "{{item.links|default([])}}"
     pull: always
     restart_policy: always
     state: reloaded
-    volumes: "{{mongodb_docker_volumes}}"
+    volumes: "{{item.volumes|default(mongodb_docker_volumes)}}"
     log_opt:
       max-size: 50m
       max-file: 10
+  with_items: "{{mongodb_docker_instances}}"
+
+- name: mongodb-docker | Run mongoshell commands
+  shell: docker exec mongodb mongo {{item.key}} --eval "{{ item.value|join(';') }}"
+  with_dict: "{{mongodb_shell}}"
