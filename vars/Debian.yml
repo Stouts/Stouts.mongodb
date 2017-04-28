@@ -1,14 +1,18 @@
 ---
 mongodb_repository_config:
-  v2.4:
-    repository: deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
-    package: mongodb-10gen
   v2.6:
     repository: deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
     package: mongodb-org
+    key: EA312927
   v3.0:
     repository: deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main
     package: mongodb-org
+    key: EA312927
   v3.2:
     repository: deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main
     package: mongodb-org
+    key: EA312927
+  v3.4:
+    repository: deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.4 main
+    package: mongodb-org
+    key: A15703C6
