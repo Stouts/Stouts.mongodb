@@ -24,22 +24,9 @@ mongodb_version: "3.2.4"                         # Fully specified target instal
 mongodb_transparent_hugepage_disable: false
 
 # Service setup options
-mongodb_version_config:                          # Custom configuration for major/minor version variants
-  v2.4:
-    daemon: mongodb
-    config_file: mongodb.conf
-  v2.6:
-    daemon: mongod
-    config_file: mongod.conf
-  v3.0:
-    daemon: mongod
-    config_file: mongod.conf
-  v3.2:
-    daemon: mongod
-    config_file: mongod.conf
-  v3.4:
-    daemon: mongod
-    config_file: mongod.conf
+mongodb_config:                          # Custom configuration for major/minor version variants
+  daemon: mongod
+  config_file: mongod.conf
 
 # Config options
 mongodb_conf_auth: no                             # Run with security
