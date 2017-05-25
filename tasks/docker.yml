@@ -31,5 +31,5 @@
   with_items: "{{mongodb_docker_instances}}"
 
 - name: mongodb-docker | Run mongoshell commands
-  shell: docker exec mongodb mongo {{item.key}} --eval "{{ item.value|join(';') }}"
+  shell: docker exec {{mongodb_docker_instances[0].name}} mongo {{item.key}} --eval "{{ item.value|join(';') }}"
   with_dict: "{{mongodb_shell}}"
