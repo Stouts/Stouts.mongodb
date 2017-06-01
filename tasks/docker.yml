@@ -18,6 +18,7 @@
     image: "{{mongodb_docker_image}}"
     command: "{{mongodb_docker_command|default(omit)}}"
     name: "{{item.name}}"
+    memory_limit: "{{item.memory_limit|default(omit)}}"
     net: "{{mongodb_docker_net}}"
     ports: "{{mongodb_docker_ports}}"
     links: "{{item.links|default([])}}"
