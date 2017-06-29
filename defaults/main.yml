@@ -77,3 +77,10 @@ mongodb_logrotate_options:
   - dateext
   - rotate 7
   - size 10M
+
+mongodb_users:
+  - name: mongo_user
+    password: password
+    role: readWrite
+    databases:
+      - sample_database

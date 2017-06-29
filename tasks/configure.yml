@@ -31,3 +31,15 @@
 - name: Run mongoshell commands
   command: mongo {{ item.key }} --eval "{{ item.value|join(';') }}"
   with_dict: "{{mongodb_shell}}"
+
+- name: Create necesary users with access to databases
+  mongodb_user:
+    name: "{{ item.0.name }}"
+    password: "{{ item.0.password }}"
+    database: "{{ item.1 }}"
+    state: present
+    roles:
+      - { db: "{{ item.1 }}", role: "{{ item.0.role }}" }
+  with_subelements:
+    - "{{ mongodb_users }}"
+    - databases
