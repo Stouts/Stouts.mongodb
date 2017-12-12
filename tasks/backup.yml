@@ -1,0 +1,20 @@
+---
+
+- name: Create a backup directory
+  file: state=directory path={{ mongodb_backup_home }} owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+
+- name: Write AWS credentials
+  template: src=backup/aws.j2 dest={{mongodb_backup_home}}/aws  owner={{mongodb_user}} group={{mongodb_user}} mode=0644
+
+- name: Create a list script
+  template: src=backup/list.sh.j2 dest={{mongodb_backup_home}}/list.sh  owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+
+- name: Create a backup script
+  template: src=backup/backup.sh.j2 dest={{mongodb_backup_home}}/backup.sh  owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+
+- name: Create a restore script
+  template: src=backup/restore.sh.j2 dest={{mongodb_backup_home}}/restore.sh  owner={{mongodb_user}} group={{mongodb_user}} mode=0755
+
+- name: Setup a CRON job
+  template: src=backup/cronjob.j2 dest=/etc/cron.d/mongo-backup  owner=root group=root mode=0644
+  when: mongodb_backup_cron

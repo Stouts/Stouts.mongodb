@@ -77,3 +77,19 @@ mongodb_logrotate_options:
   - dateext
   - rotate 7
   - size 10M
+
+# Backups
+mongodb_backup_aws_key: ""
+mongodb_backup_aws_cmd: /usr/local/bin/aws
+mongodb_backup_aws_region: "us-west-2"
+mongodb_backup_aws_secret: ""
+mongodb_backup_db: ""
+mongodb_backup_enabled: false
+mongodb_backup_home: /data/backup
+mongodb_backup_host: "{{mongodb_conf_bind_ip}}"
+mongodb_backup_pass: ""
+mongodb_backup_port: "{{mongodb_conf_port}}"
+mongodb_backup_s3path: ""
+mongodb_backup_user: ""
+mongodb_backup_cron: false
+mongodb_backup_cron_schedule: "0 1 * * *"

@@ -3,3 +3,7 @@
 - include: mongodb.yml
   when: mongodb_enabled
   tags: [mongodb]
+
+- include: backup.yml
+  when: mongodb_enabled
+  tags: [mongodb-backup]
