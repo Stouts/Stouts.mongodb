@@ -91,5 +91,6 @@ mongodb_backup_pass: ""
 mongodb_backup_port: "{{mongodb_conf_port}}"
 mongodb_backup_s3path: ""
 mongodb_backup_user: ""
+mongodb_backup_opts: ""
 mongodb_backup_cron: false
 mongodb_backup_cron_schedule: "0 1 * * *"
