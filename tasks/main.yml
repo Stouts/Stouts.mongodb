@@ -5,5 +5,5 @@
   tags: [mongodb]
 
 - include: backup.yml
-  when: mongodb_enabled
+  when: mongodb_backup_enabled
   tags: [mongodb-backup]
