@@ -13,7 +13,7 @@
   when: mongodb_docker_net == 'host'
 
 - name: mongodb-docker | Start mongo
-  docker:
+  docker_container:
     hostname: "{{item.hostname|default(mongodb_docker_hostname)}}"
     image: "{{mongodb_docker_image}}"
     command: "{{mongodb_docker_command|default(omit)}}"
