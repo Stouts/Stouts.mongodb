@@ -8,6 +8,9 @@
   template: src=logrotate.conf.j2 dest=/etc/logrotate.d/mongodb.conf
   when: mongodb_logrotate
 
+- name: Create mongodb user group if not exists
+  group: name={{mongodb_user}} state=present
+
 - name: Create mongodb user
   user: name={{mongodb_user}} group={{mongodb_user}}
 
